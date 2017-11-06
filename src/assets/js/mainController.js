@@ -79,6 +79,5 @@ app.controller("myCtrl", function ($scope, $sce) {
         $scope.currentProject = $scope.lhn[id];
         $scope.currentProjectUrl = $sce.trustAsResourceUrl($scope.currentProject.url);
     }
-}
 
 });
