@@ -74,10 +74,10 @@ app.controller("myCtrl", function ($scope, $sce) {
             "url": "https://docs.google.com/forms/d/e/1FAIpQLSdEfI7ILuKb-DoTGfbYyc5oO9Lew0q-6ZL82TpT2oSYZH1eYw/viewform?embedded=true"
         }
     ]
-
-    $scope.setProject = function (id) {
-        $scope.currentProject = $scope.lhn[id];
-        $scope.currentProjectUrl = $sce.trustAsResourceUrl($scope.currentProject.url);
-    }
-
 });
+
+app.filter('trusted', ['$sce', function ($sce) {
+    return function (url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);

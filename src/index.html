@@ -1,76 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Feedback Form</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feedback Form</title>
 
-        <link rel="stylesheet" href="./assets/css/mysite.css">
-        <!-- angular lib -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <link rel="stylesheet" href="./assets/css/mysite.css">
+    <!-- angular lib -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
 
-        <script src="./assets/js/mainController.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="./assets/js/mainController.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
-        <!-- bootstrap css -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-    <body ng-controller="myCtrl">
-        <div class="container">
-            <div class="jumbotron">
-                <h2>Technology Conclave Feedback</h2>
-                <p>Here you can give Feedback on different Sessions held for Tech Conclave.</p>
-            </div>
+<body ng-controller="myCtrl">
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Technology Conclave Feedback</h2>
+            <p>Here you can give Feedback on different Sessions held for Tech Conclave.</p>
         </div>
-        <div class="container eventcard">
-            <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4" ng-repeat="session in lhn">
-                    <div class="card card-inverse card-info">
-                        <img class="card-img-top" src="{{session.imgpath}}">
-                        <div class="card-block">
-                            <h4 align="center" class="card-title">{{session.topic}}</h4>
-                            <figure class="profile profile-inline">
-                                <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="profile-avatar" alt="">
-                            </figure>
-                            <h5 class="name">{{session.name}}</h5>
-                            <div class="card-text">
-                                {{session.name}} is a web designer living in Pune.
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button href="#my{{session.id}}" ng-click="setProject(project.id)" data-toggle="modal" class="btn btn-info btn-sm">Feedback</button>
+    </div>
+    <div class="container eventcard">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4" ng-repeat="session in lhn">
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="{{session.imgpath}}">
+                    <div class="card-block">
+                        <h4 align="center" class="card-title">{{session.topic}}</h4>
+                        <figure class="profile profile-inline">
+                            <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="profile-avatar" alt="">
+                        </figure>
+                        <h5 class="name">{{session.name}}</h5>
+                        <div class="card-text">
+                            {{session.name}} is a web designer living in Pune.
                         </div>
                     </div>
-                    <div id="my{{session.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3 id="myModalLabel">We'd Love to Hear From You on {{session.topic}}</h3>
+                    <div class="card-footer">
+                        <button href="#my{{session.id}}" data-toggle="modal" class="btn btn-info btn-sm">Feedback</button>
+                    </div>
+                </div>
+                <div id="my{{session.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">We'd Love to Hear From You on {{session.topic}}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe ng-src="{{session.url | trusted}}" frameborder="1" marginheight="1" marginwidth="1">Loading...</iframe>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <!-- <h4 id="myModalLabel">We'd Love to Hear From You on {{session.url}}</h4> -->
-                                        <iframe ng-src="{{currentProjectUrl}}" frameborder="1" marginheight="1" marginwidth="1">Loading...</iframe>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
 </html>
